@@ -1,93 +1,98 @@
 import 'package:flutter/material.dart';
-
+import 'package:seclob_machine_task/core/constants/app_images.dart';
 
 class ServiceSection extends StatelessWidget {
- 
-
-  const ServiceSection({super.key, });
+  const ServiceSection({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Services',
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
-        const SizedBox(height: 12),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.grey.shade100,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          padding: const EdgeInsets.all(12),
-          child: GridView.count(
-            crossAxisCount: 2,
-            crossAxisSpacing: 12,
-            mainAxisSpacing: 12,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            children: const [
-              ServiceTile(title: 'E-card', icon: Icons.credit_card_outlined),
-              ServiceTile(title: 'HR insight', icon: Icons.groups_outlined),
-              ServiceTile(
-                title: 'Recharge',
-                icon: Icons.bolt_outlined,
-                tag: 'Get 10% Extra',
-              ),
-              ServiceTile(title: 'DTH/Cable', icon: Icons.satellite_alt_outlined),
-            ],
-          ),
-        )
+        // const SizedBox(height: 12),
+        GridView.count(
+          shrinkWrap: true,
+
+          physics: NeverScrollableScrollPhysics(),
+
+          crossAxisCount: 2,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+          childAspectRatio: 2.5,
+          children: [
+            ServiceTile(title: 'E-card', imagePath: AppImages.eCardImg),
+            ServiceTile(title: 'HR insight', imagePath: AppImages.handImg),
+            ServiceTile(
+              title: 'Recharge',
+              imagePath: AppImages.rechargeImg,
+              tag: 'Get 10% Extra',
+            ),
+            ServiceTile(title: 'DTH/Cable', imagePath: AppImages.cableImg),
+          ],
+        ),
       ],
     );
   }
 }
 
-
 class ServiceTile extends StatelessWidget {
   final String title;
-  final IconData icon;
+  final String imagePath;
   final String? tag;
 
   const ServiceTile({
     super.key,
     required this.title,
-    required this.icon,
+    required this.imagePath,
     this.tag,
   });
 
   @override
   Widget build(BuildContext context) {
     return Stack(
+      clipBehavior: Clip.none,
       children: [
         Container(
           decoration: BoxDecoration(
+            color: Colors.white,
             border: Border.all(color: Colors.grey.shade300),
             borderRadius: BorderRadius.circular(12),
           ),
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          // padding: const EdgeInsets.symmetric(vertical: 24),
+          child: Row(
             children: [
-              Icon(icon, size: 36),
-              const SizedBox(height: 8),
-              Text(title, style: const TextStyle(fontSize: 16)),
+              Image.asset(imagePath, height: 70, width: 70),
+              // SizedBox(width: 5,),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
+
         if (tag != null)
           Positioned(
             top: 0,
-            left: 0,
+            left: 110,
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: const BoxDecoration(
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              decoration: BoxDecoration(
                 color: Colors.deepPurple,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(12),
-                  bottomRight: Radius.circular(12),
+                borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(12),
+                  bottomLeft: Radius.circular(12),
                 ),
               ),
               child: Text(
@@ -100,4 +105,3 @@ class ServiceTile extends StatelessWidget {
     );
   }
 }
-

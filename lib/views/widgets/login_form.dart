@@ -1,9 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seclob_machine_task/core/widgets/custom_button.dart';
 import 'package:seclob_machine_task/viewmodel/auth_viewmodel.dart';
-import 'package:seclob_machine_task/views/home/home_screen.dart';
-import 'package:seclob_machine_task/views/profile/profile_screen.dart';
+import 'package:seclob_machine_task/views/widgets/bottom_nav.dart';
 
 class LoginFormCard extends StatefulWidget {
   const LoginFormCard({super.key});
@@ -13,13 +14,15 @@ class LoginFormCard extends StatefulWidget {
 }
 
 class _LoginFormCardState extends State<LoginFormCard> {
+  //controller
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
+  //formkey
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool obscureText = false;
   @override
   Widget build(BuildContext context) {
-    final authVm = Provider.of<AuthViewmodel>(context);
+    final authVm = Provider.of<AuthProvider>(context);
     return Form(
       key: formKey,
       child: Column(
@@ -27,7 +30,6 @@ class _LoginFormCardState extends State<LoginFormCard> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: TextFormField(
-              
               validator: _validateEmail,
               controller: emailController,
               decoration: InputDecoration(
@@ -63,16 +65,16 @@ class _LoginFormCardState extends State<LoginFormCard> {
                 hintStyle: TextStyle(color: Colors.grey),
                 prefixIcon: Icon(Icons.lock_outline, color: Colors.grey),
                 suffixIcon: IconButton(
-      icon: Icon(
-        obscureText? Icons.visibility_off : Icons.visibility,
-        color: Colors.grey,
-      ),
-      onPressed: () {
-        setState(() {
-          obscureText = !obscureText;
-        });
-      },
-    ),
+                  icon: Icon(
+                    obscureText ? Icons.visibility_off : Icons.visibility,
+                    color: Colors.grey,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      obscureText = !obscureText;
+                    });
+                  },
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(color: Colors.white70),
@@ -98,32 +100,34 @@ class _LoginFormCardState extends State<LoginFormCard> {
                 authVm.isLoading
                     ? Center(child: CircularProgressIndicator())
                     : CustomButton('Log In', () async {
-                     _handleLogin(authVm);
+                      _handleLogin(authVm);
                     }),
           ),
         ],
       ),
     );
   }
-  void _handleLogin(AuthViewmodel authVm) async {
-  if (formKey.currentState!.validate()) {
-    final success = await authVm.login(
-      emailController.text.trim(),
-      passController.text.trim(),
-    );
 
-    if (success) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const HomeScreen()),
+  void _handleLogin(AuthProvider authVm) async {
+    if (formKey.currentState!.validate()) {
+      final success = await authVm.login(
+        emailController.text.trim(),
+        passController.text.trim(),
       );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(authVm.error ?? 'Login failed')),
-      );
+
+      if (success) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) =>  MainScreen()),
+          (Route<dynamic> route) => false,
+        );
+      } else {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(authVm.error ?? 'Login failed')));
+      }
     }
   }
-}
 
   String? _validateEmail(String? value) {
     if (value == null || value.trim().isEmpty) {

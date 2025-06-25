@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:seclob_machine_task/core/services/user_service.dart';
+import 'package:seclob_machine_task/core/services/wallet_service.dart';
 import 'package:seclob_machine_task/viewmodel/auth_viewmodel.dart';
-import 'package:seclob_machine_task/views/onboarding/onboarding1.dart';
+import 'package:seclob_machine_task/viewmodel/user_provider.dart';
+import 'package:seclob_machine_task/viewmodel/wallet_viewmodel.dart';
 import 'package:seclob_machine_task/views/onboarding/splash.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
-          ChangeNotifierProvider(create: (_)=>AuthViewmodel())
+          ChangeNotifierProvider(create: (_)=>AuthProvider()),
+          ChangeNotifierProvider(
+          create: (_) => BalanceProvider(BalanceService()),
+        ),
+        ChangeNotifierProvider(create: (_)=>UserProvider(UserService()))
       ],
       child: MyApp(),
     )
@@ -18,7 +25,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+ 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,7 +35,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(        
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
-        home: OnboardingOne()
+        home: SplashScreen()
       );
   
   }
