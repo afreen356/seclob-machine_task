@@ -102,7 +102,7 @@ class _LoginFormCardState extends State<LoginFormCard> {
             child:
                 authVm.isLoading
                     ? Center(child: CircularProgressIndicator())
-                    : CustomButton('Log In', () async {
+                    : LoginButton('Log In', () async {
                       _handleLogin(authVm);
                     }),
           ),

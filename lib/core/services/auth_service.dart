@@ -6,26 +6,24 @@ import 'package:http/http.dart' as http;
 
 class ApiServices {
   Future<UserModel> loginUser(String email, String password) async {
-    final url = Uri.parse('${ApiUrls.base}${Endpoints.login}');
+
+    try {
+       final url = Uri.parse('${ApiUrls.base}${Endpoints.login}');
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'email': email.trim(),
-        'password': password.trim(),
-      }),
+      body: jsonEncode({'email': email.trim(), 'password': password.trim()}),
     );
     log('URL: ${ApiUrls.base}${Endpoints.login}');
     log('Body: ${jsonEncode({'email': email, 'password': password})}');
     log('REQUEST BODY: ${jsonEncode({'email': email, 'password': password})}');
     final data = jsonDecode(response.body);
     if (response.statusCode == 200) {
-      
-      final accesstoken = data['accessToken']??'';
+      final accesstoken = data['accessToken'] ?? '';
       if (accesstoken == null) {
         throw Exception('Token not found in response');
       }
-      
+
       log('Login Successful. Token: $accesstoken');
       log('accessToke $accesstoken');
       // Success: return user data
@@ -38,11 +36,23 @@ class ApiServices {
       throw Exception('Server error. Please try again later.');
     } else {
       // Any other error
-     final errorMsg = data['message'] ?? 
-          (response.statusCode == 400 || response.statusCode == 401 
-              ? 'Invalid email or password' 
+      final errorMsg =
+          data['message'] ??
+          (response.statusCode == 400 || response.statusCode == 401
+              ? 'Invalid email or password'
               : 'Login failed with status ${response.statusCode}');
       throw Exception(errorMsg);
     }
+    } catch (e) {
+   if (e is http.ClientException) {
+      throw Exception('Network error. Please check your internet connection.');
+    } else if (e.toString().contains('SocketException')) {
+      throw Exception('Cannot connect to server. Please try again later.');
+    } else {
+      throw Exception(e.toString().replaceAll('Exception: ', ''));
+    }
+  }
   }
 }
+
+
