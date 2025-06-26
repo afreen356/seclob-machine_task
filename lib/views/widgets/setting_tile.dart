@@ -25,36 +25,62 @@ class SettingItem extends StatelessWidget {
   }
 }
 
-class SettingSwitchItem extends StatelessWidget {
+class SettingSwitchItem extends StatefulWidget {
   final IconData icon;
   final String title;
-  bool isOn;
+  final bool initialValue;
+  final ValueChanged<bool>? onChanged;
 
-  SettingSwitchItem({
+  const SettingSwitchItem({
     super.key,
     required this.icon,
     required this.title,
-    this.isOn = false,
+    this.initialValue = false,
+    this.onChanged,
   });
+
+  @override
+  State<SettingSwitchItem> createState() => _SettingSwitchItemState();
+}
+
+class _SettingSwitchItemState extends State<SettingSwitchItem> {
+  late bool isOn;
+
+  @override
+  void initState() {
+    super.initState();
+    isOn = widget.initialValue;
+  }
+
+  void toggleSwitch() {
+    setState(() {
+      isOn = !isOn;
+    });
+
+    if (widget.onChanged != null) {
+      widget.onChanged!(isOn);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return ListTile(
-      leading: Icon(icon, color: Colors.black87,size: screenWidth * 0.06),
+      leading: Icon(widget.icon, color: Colors.black87, size: screenWidth * 0.06),
       title: Text(
-        title,
-        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+        widget.title,
+        style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
       ),
       trailing: Icon(
         isOn ? Icons.toggle_on : Icons.toggle_off,
-        color: Colors.grey.withOpacity(0.5),
-       size: screenWidth * 0.1
+        color: isOn ? Colors.green : Colors.grey.withOpacity(0.5),
+        size: screenWidth * 0.1,
       ),
-      onTap: () {},
+      onTap: toggleSwitch,
     );
   }
 }
+
 
 class LogoutButton extends StatelessWidget {
   const LogoutButton({super.key});

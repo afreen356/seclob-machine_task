@@ -15,7 +15,8 @@ void main() {
           ChangeNotifierProvider(
           create: (_) => BalanceProvider(BalanceService()),
         ),
-        ChangeNotifierProvider(create: (_)=>UserProvider(UserService()))
+        ChangeNotifierProvider(create: (_)=>UserProvider(UserService())),
+       
       ],
       child: MyApp(),
     )

@@ -7,15 +7,12 @@ class HeadingText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 20),
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontSize: 32,
-          fontWeight: FontWeight.w500,
-          color: Colors.black, 
-        ),
+    return Text(
+      text,
+      style: const TextStyle(
+        fontSize: 28,
+        fontWeight: FontWeight.w500,
+        color: Colors.black, 
       ),
     );
   }
@@ -27,23 +24,20 @@ class SubheadingText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 20),
-      child: Container(
-        height: 40,
-        // alignment: Alignment.bottomCenter,
-      padding: EdgeInsets.symmetric(horizontal: 12,),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: Appcolors.shadecolor
-        ),
-        child: Text(
-          text,
-          style:  TextStyle(
-            fontSize: 32,
-            fontWeight: FontWeight.w500,
-            color: Colors.black 
-          ),
+    return Container(
+      height: 40,
+      // alignment: Alignment.bottomCenter,
+    padding: EdgeInsets.symmetric(horizontal: 12,),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: Appcolors.shadecolor
+      ),
+      child: Text(
+        text,
+        style:  TextStyle(
+          fontSize: 28,
+          fontWeight: FontWeight.w500,
+          color: Colors.black 
         ),
       ),
     );

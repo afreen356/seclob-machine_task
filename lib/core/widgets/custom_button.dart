@@ -15,14 +15,14 @@ class CustomButton extends StatelessWidget {
             child: ElevatedButton(
               onPressed: onPressed,
               style: ElevatedButton.styleFrom(
-                backgroundColor: Appcolors.primarycolor,
+                backgroundColor: Color(0xFF491B6D),
                 foregroundColor: Colors.white,
                 textStyle: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                 ),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(20),
                   side: const BorderSide(
                     color: Colors.white,
                     width: 1,

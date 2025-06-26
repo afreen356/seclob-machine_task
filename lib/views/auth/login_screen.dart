@@ -8,43 +8,61 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      body: Stack(
+      body: Column(
         children: [
-          SquareBg(screenHeight: screenHeight),
-          SafeArea(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: screenHeight,
-                ),
-                child: IntrinsicHeight(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: const [
-                          SizedBox(height: 60),
-                          LogoHeader(),
-                          SizedBox(height: 20),
-                          WelcomeText(),
-                          SizedBox(height: 40),
-                          LoginFormCard(),
-                        ],
-                      ),
-                      Column(
-                        children: const [
-                          SocialLogin(),
-                          SizedBox(height: 20),
-                          SignUpText(),
-                          SizedBox(height: 20),
-                        ],
-                      ),
-                    ],
+          // 🔵 Fixed Header with background and welcome
+          SizedBox(
+            height: screenHeight * 0.35,
+            child: Stack(
+              children: [
+                SquareBg(screenHeight: screenHeight),
+                SafeArea(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        SizedBox(height: 50),
+                        LogoHeader(),
+                        SizedBox(height: 20),
+                        WelcomeText(),
+                      ],
+                    ),
                   ),
                 ),
+              ],
+            ),
+          ),
+
+          // ⚪ Scrollable white area with Login Form
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              color: Colors.white,
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return SingleChildScrollView(
+                    padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                      child: IntrinsicHeight(
+                        child: Column(
+                          children: const [
+                            LoginFormCard(),
+                            Spacer(),
+                            SocialLogin(),
+                            SizedBox(height: 10),
+                            SignUpText(),
+                            SizedBox(height: 20),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ),
