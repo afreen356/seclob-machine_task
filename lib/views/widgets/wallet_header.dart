@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seclob_machine_task/core/constants/app_images.dart';
@@ -25,11 +27,16 @@ class _WalletHeaderBgState extends State<WalletHeaderBg> {
   @override
   Widget build(BuildContext context) {
     final balanceProvider = Provider.of<BalanceProvider>(context);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Container(
-      height: MediaQuery.of(context).size.height * 0.3,
+      height: screenHeight * 0.3,
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+      padding: EdgeInsets.symmetric(
+        horizontal: screenWidth * 0.05,
+        vertical: screenHeight * 0.03,
+      ),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(AppImages.walletBlncBg),
@@ -39,8 +46,7 @@ class _WalletHeaderBgState extends State<WalletHeaderBg> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 35),
-          // Greeting & Notification
+          SizedBox(height: screenHeight * 0.04), 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -49,56 +55,83 @@ class _WalletHeaderBgState extends State<WalletHeaderBg> {
                 style: TextStyle(
                   color: Colors.black,
                   fontFamily: 'PoligraphGrotesk',
-                  fontSize: 22,
+                  fontSize: screenWidth * 0.055, 
                   fontWeight: FontWeight.w400,
                 ),
               ),
-              Icon(Icons.notifications_active_outlined, color: Colors.black),
+              Icon(
+                Icons.notifications_active_outlined,
+                color: Colors.black,
+                size: screenWidth * 0.065, 
+              ),
             ],
           ),
-          // SizedBox(height: 40,),
-          const Spacer(),
+
+          Spacer(),
 
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Available balance',
-                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: screenWidth * 0.035, 
+                ),
               ),
               Consumer<BalanceProvider>(
                 builder: (context, provider, _) {
                   if (provider.isLoading) {
-                    return Text('0.00');
+                    return Text(
+                      '0.00',
+                      style: TextStyle(
+                        fontSize: screenWidth * 0.06,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    );
                   }
 
                   if (provider.error != null) {
                     return Text(
                       provider.error!,
-                      style: const TextStyle(color: Colors.red),
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: screenWidth * 0.04,
+                      ),
                     );
                   }
+
                   return Text(
                     '₹${balanceProvider.balance.formattedAmount}',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontSize: screenWidth * 0.075, 
+                      fontWeight: FontWeight.w500,
+                    ),
                   );
                 },
               ),
             ],
           ),
 
-          // const SizedBox(height: 16),
+          SizedBox(height: screenHeight * 0.015),
+
           ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.deepPurple,
               foregroundColor: Colors.white,
-              // padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              padding: EdgeInsets.symmetric(
+                horizontal: screenWidth * 0.05,
+                vertical: screenHeight * 0.012,
+              ),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(screenWidth * 0.02),
               ),
             ),
-            child: const Text('+ Add'),
+            child: Text(
+              '+ Add',
+              style: TextStyle(fontSize: screenWidth * 0.04),
+            ),
           ),
         ],
       ),

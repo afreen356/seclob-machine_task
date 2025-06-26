@@ -23,6 +23,8 @@ class _BigSaleBannerState extends State<BigSaleBanner> {
 
   @override
   Widget build(BuildContext context) {
+     final screenWidth = MediaQuery.of(context).size.width;
+    final bannerHeight = screenWidth * 0.4;
     return Column(
       children: [
         _isLoading
@@ -30,7 +32,7 @@ class _BigSaleBannerState extends State<BigSaleBanner> {
               baseColor: Colors.grey.shade300,
               highlightColor: Colors.grey.shade100,
               child: Container(
-                height: 150,
+                height: bannerHeight,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -42,7 +44,7 @@ class _BigSaleBannerState extends State<BigSaleBanner> {
               borderRadius: BorderRadius.circular(12),
               child: Image.asset(
                 AppImages.bigsaleImg,
-                height: 150,
+                height: bannerHeight,
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),

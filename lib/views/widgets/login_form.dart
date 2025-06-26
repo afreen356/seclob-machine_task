@@ -22,13 +22,14 @@ class _LoginFormCardState extends State<LoginFormCard> {
   bool obscureText = false;
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
     final authVm = Provider.of<AuthProvider>(context);
     return Form(
       key: formKey,
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
+            padding:  EdgeInsets.symmetric(horizontal: screenWidth * 0.5),
             child: TextFormField(
               validator: _validateEmail,
               controller: emailController,

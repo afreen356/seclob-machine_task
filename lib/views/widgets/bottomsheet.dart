@@ -18,10 +18,19 @@ class LogoutConfirmationSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final horizontalPadding = screenWidth * 0.06; 
+    final verticalPadding = screenHeight * 0.035; 
+    final titleFontSize = screenWidth * 0.05; 
+    final descFontSize = screenWidth * 0.035; 
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
+      padding: EdgeInsets.symmetric(
+        horizontal: horizontalPadding,
+        vertical: verticalPadding,
+      ),
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -36,18 +45,24 @@ class LogoutConfirmationSheet extends StatelessWidget {
               ),
             ),
           ),
-          Icon(Icons.error_outline_outlined, color: Colors.red, size: 40),
-          const SizedBox(height: 16),
-          const Text(
-            'log out?',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+          Icon(Icons.error_outline_outlined, color: Colors.red, size: screenWidth * 0.1), // ~40
+          SizedBox(height: screenHeight * 0.02), 
+          Text(
+            'Log out?',
+            style: TextStyle(
+              fontSize: titleFontSize,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-          const SizedBox(height: 8),
-          const Text(
+          SizedBox(height: screenHeight * 0.01), 
+          Text(
             'Are you sure you want to log out?',
-            style: TextStyle(fontSize: 14, color: Colors.grey),
+            style: TextStyle(
+              fontSize: descFontSize,
+              color: Colors.grey,
+            ),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: screenHeight * 0.03), 
           Row(
             children: [
               Expanded(
@@ -63,13 +78,13 @@ class LogoutConfirmationSheet extends StatelessWidget {
                   child: const Text("Cancel"),
                 ),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: screenWidth * 0.03), 
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (_) => LoginScreen()),
+                      MaterialPageRoute(builder: (_) => const LoginScreen()),
                       (Route<dynamic> route) => false,
                     );
                   },

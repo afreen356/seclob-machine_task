@@ -6,6 +6,7 @@ class ServiceSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -20,8 +21,8 @@ class ServiceSection extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
 
           crossAxisCount: 2,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
+          mainAxisSpacing: screenWidth * 0.025,
+          crossAxisSpacing: screenWidth * 0.025,
           childAspectRatio: 2.5,
           children: [
             ServiceTile(title: 'E-card', imagePath: AppImages.eCardImg),
@@ -53,6 +54,7 @@ class ServiceTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -65,7 +67,8 @@ class ServiceTile extends StatelessWidget {
           // padding: const EdgeInsets.symmetric(vertical: 24),
           child: Row(
             children: [
-              Image.asset(imagePath, height: 70, width: 70),
+              Image.asset(imagePath,   height: screenWidth * 0.18, 
+                width: screenWidth * 0.18,),
               // SizedBox(width: 5,),
               const SizedBox(width: 12),
               Expanded(

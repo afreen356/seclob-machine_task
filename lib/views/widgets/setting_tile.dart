@@ -11,14 +11,15 @@ class SettingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return ListTile(
       // contentPadding: EdgeInsets.only(right: 20),
-      leading: Icon(icon, color: Colors.black87),
+      leading: Icon(icon, color: Colors.black87,size: screenWidth * 0.06),
       title: Text(
         title,
         style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
       ),
-      trailing: const Icon(Icons.arrow_forward_ios, size: 20),
+      trailing:  Icon(Icons.arrow_forward_ios, size: screenWidth * 0.05),
       onTap: () {},
     );
   }
@@ -38,8 +39,9 @@ class SettingSwitchItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return ListTile(
-      leading: Icon(icon, color: Colors.black87),
+      leading: Icon(icon, color: Colors.black87,size: screenWidth * 0.06),
       title: Text(
         title,
         style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
@@ -47,7 +49,7 @@ class SettingSwitchItem extends StatelessWidget {
       trailing: Icon(
         isOn ? Icons.toggle_on : Icons.toggle_off,
         color: Colors.grey.withOpacity(0.5),
-        size: 40,
+       size: screenWidth * 0.1
       ),
       onTap: () {},
     );
@@ -59,9 +61,10 @@ class LogoutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return ListTile(
       // contentPadding: EdgeInsets.only(right: 20),
-      leading: Icon(Icons.logout, color: Colors.red),
+      leading: Icon(Icons.logout, color: Colors.red,size: screenWidth*0.06,),
       title: Text(
         'Log out',
         style: TextStyle(

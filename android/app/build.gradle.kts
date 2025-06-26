@@ -7,8 +7,8 @@ plugins {
 
 android {
     namespace = "com.example.seclob_machine_task"
-    compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    compileSdk = 35
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -24,11 +24,21 @@ android {
         applicationId = "com.example.seclob_machine_task"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        minSdk = 21
+        targetSdk = 35
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
+
+   splits {
+    abi {
+        isEnable = true
+        reset()
+        include("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
+        isUniversalApk = true
+    }
+}
+
 
     buildTypes {
         release {

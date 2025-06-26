@@ -6,23 +6,28 @@ class LogoHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(    
-      children: [   
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Image.asset(AppImages.logoImg,height: 40,width: 50,),
-            ),
-            // SizedBox(width: 10,),
-            Text(
-              "seclob",
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'PoligraphGrotesk',
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-         
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    return Row(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(left: screenWidth * 0.05),
+          child: Image.asset(
+            AppImages.logoImg,
+            height: screenWidth * 0.1, 
+            width: screenWidth * 0.12,  
+          ),
+        ),
+        SizedBox(width: screenWidth * 0.02), 
+        Text(
+          "seclob",
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'PoligraphGrotesk',
+            fontSize: screenWidth * 0.07, 
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ],
     );
   }
@@ -36,7 +41,7 @@ class SquareBg extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.3,
+      height: screenHeight * 0.3,
       width: double.infinity,
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -47,13 +52,16 @@ class SquareBg extends StatelessWidget {
     );
   }
 }
+
 class WelcomeText extends StatelessWidget {
   const WelcomeText({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05), 
       child: Align(
         alignment: Alignment.centerLeft,
         child: Column(
@@ -63,16 +71,17 @@ class WelcomeText extends StatelessWidget {
               "Welcome back!",
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.w500
+                fontSize: screenWidth * 0.06, 
+                fontWeight: FontWeight.w500,
               ),
             ),
+            SizedBox(height: screenWidth * 0.01), 
             Text(
               "Welcome back to your workspace.",
               style: TextStyle(
                 color: Colors.white,
+                fontSize: screenWidth * 0.035, 
                 fontWeight: FontWeight.w400,
-                fontSize: 14,
               ),
             ),
           ],
