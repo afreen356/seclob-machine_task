@@ -29,8 +29,9 @@ class _LoginFormCardState extends State<LoginFormCard> {
       child: Column(
         children: [
           Padding(
-            padding:  EdgeInsets.symmetric(horizontal: screenWidth * 0.5),
+            padding:  EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
             child: TextFormField(
+              keyboardType: TextInputType.emailAddress,
               validator: _validateEmail,
               controller: emailController,
               decoration: InputDecoration(
@@ -58,6 +59,7 @@ class _LoginFormCardState extends State<LoginFormCard> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: TextFormField(
+              keyboardType: TextInputType.text,
               validator: _validatePassword,
               controller: passController,
               obscureText: obscureText,

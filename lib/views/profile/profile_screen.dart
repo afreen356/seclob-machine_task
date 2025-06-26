@@ -45,7 +45,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       );
     }
     final user = provider.userDetails;
-    if (user == null) return Text('No Data');
+    if (user == null) return Center(child: Text('No Data'));
           return  Container(
                 margin: const EdgeInsets.all(16),
                 padding: const EdgeInsets.all(16),

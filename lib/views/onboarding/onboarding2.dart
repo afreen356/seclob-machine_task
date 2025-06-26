@@ -15,40 +15,53 @@ class OnboardingTwo extends StatefulWidget {
 class _OnboardingTwoState extends State<OnboardingTwo> {
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: SizedBox(
-           height: MediaQuery.of(context).size.height,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 120),
-              HeadingText('Manage Your Partners'),
-              SizedBox(height: 5),
-              SubheadingText('Seamlessly'),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, top: 15),
-                child: Text(
-                  "Add view and collaborate with your team or resellers,\n all from a single dashboard",
-                  // textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 15, color: Colors.black),
+          height: height,
+          width: width,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: width * 0.06),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: height * 0.12),
+                HeadingText('Manage Your Partners'),
+                SizedBox(height: height * 0.008),
+                SubheadingText('Seamlessly'),
+                SizedBox(height: height * 0.015),
+                Text(
+                  "Add, view and collaborate with your team or resellers,\nall from a single dashboard",
+                  style: TextStyle(
+                    fontSize: width * 0.038,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-              SizedBox(height: 50),
-              Center(child: Image.asset(AppImages.trustImg)),
-              // SizedBox(height: 10,),
-              SizedBox(
-                height: 10,),
+                SizedBox(height: height * 0.05),
+                Center(
+                  child: Image.asset(
+                    AppImages.trustImg,
+                    width: width * 0.75,
+                    height: height * 0.35,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                SizedBox(height: height * 0.02),
                 buildIndicator(1),
-                              SizedBox(height: 50,),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30),
-                      child: CustomButton('Next',(){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>OnboardingThree()));
-                      }),
-                    )
-              
-            ],
+                SizedBox(height: height * 0.05),
+                CustomButton(
+                  'Next',
+                  () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => OnboardingThree()),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

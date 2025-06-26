@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:seclob_machine_task/core/constants/app_images.dart';
 import 'package:seclob_machine_task/core/widgets/custom_button.dart';
 import 'package:seclob_machine_task/core/widgets/custom_indicator.dart';
@@ -14,44 +13,58 @@ class OnboardingOne extends StatefulWidget {
 }
 
 class _OnboardingOneState extends State<OnboardingOne> {
-  
   @override
   Widget build(BuildContext context) {
-   
+    final size = MediaQuery.of(context).size;
+    final height = size.height;
+    final width = size.width;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: SizedBox(
-           height: MediaQuery.of(context).size.height,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 120),
-              HeadingText('Welcome To'),
-              SizedBox(height: 5),
-              SubheadingText('Seclob'),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, top: 15),
-                child: Text(
+          height: height,
+          width: width,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: width * 0.06),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: height * 0.12),
+                HeadingText('Welcome To'),
+                SizedBox(height: height * 0.008),
+                SubheadingText('Seclob'),
+                SizedBox(height: height * 0.015),
+                Text(
                   "Start growing your business with our platform — track sales, manage clients, and maximize profits.",
-                  // textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 15, color: Colors.black),
+                  style: TextStyle(
+                    fontSize: width * 0.038,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-              SizedBox(height: 50),
-              Center(child: Image.asset(AppImages.moneyImg)),
-              // SizedBox(height: 10,),
-              SizedBox(
-                height: 10,),
+                SizedBox(height: height * 0.05),
+                Center(
+                  child: Image.asset(
+                    AppImages.moneyImg,
+                    width: width * 0.75,
+                    height: height * 0.35,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                SizedBox(height: height * 0.015),
                 buildIndicator(0),
-                              SizedBox(height: 30,),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30),
-                      child: CustomButton('Next',(){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>OnboardingTwo()));
-                      }),
-                    )
-          
-            ],
+                SizedBox(height: height * 0.035),
+                CustomButton(
+                  'Next',
+                  () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => OnboardingTwo(),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

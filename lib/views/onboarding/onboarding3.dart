@@ -10,41 +10,53 @@ class OnboardingThree extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: SizedBox(
-           height: MediaQuery.of(context).size.height,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 120),
-              HeadingText('Analyze & Boost Your'),
-              SizedBox(height: 5),
-              SubheadingText('Earnings'),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, top: 15),
-                child: Text(
-                  "Get real-time reports,track performance and\n maximize incentives with ease",
-                  // textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 15, color: Colors.black),
+          height: height,
+          width: width,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: width * 0.06),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: height * 0.12),
+                HeadingText('Analyze & Boost Your'),
+                SizedBox(height: height * 0.008),
+                SubheadingText('Earnings'),
+                SizedBox(height: height * 0.015),
+                Text(
+                  "Get real-time reports, track performance and\nmaximize incentives with ease",
+                  style: TextStyle(
+                    fontSize: width * 0.038,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-              SizedBox(height: 50),
-              Center(child: Image.asset(AppImages.recieveMoneyImg)),
-              // SizedBox(height: 10,),
-              SizedBox(
-                height: 10,),
+                SizedBox(height: height * 0.05),
+                Center(
+                  child: Image.asset(
+                    AppImages.recieveMoneyImg,
+                    width: width * 0.75,
+                    height: height * 0.35,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                SizedBox(height: height * 0.02),
                 buildIndicator(2),
-                              SizedBox(height: 50,),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30),
-                      child: CustomButton('Sign in',(){
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context)=>LoginScreen()));
-                      }),
-                    )
-          
-            ],
+                SizedBox(height: height * 0.05),
+                CustomButton(
+                  'Sign in',
+                  () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const LoginScreen()),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

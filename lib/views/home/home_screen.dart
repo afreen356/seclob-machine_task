@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          // Wallet Header stays at the top of the scroll
+          // Wallet Header 
           SliverToBoxAdapter(
             child: WalletHeaderBg(),
           ),
