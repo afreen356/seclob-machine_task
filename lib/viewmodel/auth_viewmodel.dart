@@ -34,6 +34,7 @@ class AuthProvider with ChangeNotifier {
       _isAuthenticated = true;
       return true;
     } catch (e) {
+      
       _error = e.toString();
       _isAuthenticated = false;
       return false;
